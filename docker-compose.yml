@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  wspoc-server:
+    image: wspoc
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: ["python", "/app/src/server.py"]
+    ports:
+      - "6875:6875"
+
+  wspoc-client:
+    image: wspoc
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: ["python", "/app/src/client.py"]
+    environment: 
+      WS_HOST: wspoc-server
